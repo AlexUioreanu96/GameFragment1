@@ -12,6 +12,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mButton = findViewById(R.id.open_button);
+
+        mButton.setOnClickListener {
+
+        }
     }
 
     fun displayFragment() {
@@ -24,4 +28,17 @@ class MainActivity : AppCompatActivity() {
         // TODO: Add the SimpleFragment.
     }
 
+    fun closeFragment() {
+
+        val simpleFragment = SimpleFragment()
+        simpleFragment?.let {
+            supportFragmentManager.beginTransaction().apply {
+                supportFragmentManager.beginTransaction().apply {
+                    remove(simpleFragment).commit()
+                }
+            }
+        }
+        mButton?.setText(R.string.close)
+        isFragmentDisplayed = false
+    }
 }
