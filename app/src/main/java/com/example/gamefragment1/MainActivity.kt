@@ -7,22 +7,37 @@ import androidx.appcompat.app.AppCompatActivity
 const val STATE_FRAGMENT = "state_of_fragment"
 
 class MainActivity : AppCompatActivity() {
-    private var mButton: Button? = null
+    lateinit var mButton: Button
     private var isFragmentDisplayed = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mButton = findViewById(R.id.open_button);
+        mButton = findViewById(R.id.open_button)
 
+        mButton.setOnClickListener {
+            if (isFragmentDisplayed) {
+                closeFragment()
+            } else {
+                displayFragment()
+            }
+        }
+
+        if (savedInstanceState != null) {
+            isFragmentDisplayed =
+                savedInstanceState.getBoolean(STATE_FRAGMENT);
+            if (isFragmentDisplayed) {
+                mButton.setText(R.string.close)
+            }
+        }
     }
 
     fun displayFragment() {
         val simpleFragment = SimpleFragment()
         supportFragmentManager.beginTransaction().apply {
             add(R.id.fragment_container, simpleFragment).addToBackStack(null).commit()
-            mButton?.setText(R.string.close);
+            mButton.setText(R.string.close);
             isFragmentDisplayed = true
         }
         // TODO: Add the SimpleFragment.
@@ -32,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         val simpleFragment = supportFragmentManager.findFragmentByTag("1") ?: return
         supportFragmentManager.beginTransaction().apply {
             hide(simpleFragment)
-            mButton?.setText(R.string.open)
+            mButton.setText(R.string.open)
             isFragmentDisplayed = false
             commit()
         }
@@ -44,14 +59,5 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(savedInstanceState)
     }
 
-    override fun onStart() {
-        super.onStart()
-        mButton?.setOnClickListener {
-            if (isFragmentDisplayed) {
-                closeFragment()
-            } else {
-                displayFragment()
-            }
-        }
-    }
+
 }
