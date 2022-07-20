@@ -4,18 +4,19 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
+const val STATE_FRAGMENT = "state_of_fragment"
+
 class MainActivity : AppCompatActivity() {
     private var mButton: Button? = null
     private var isFragmentDisplayed = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mButton = findViewById(R.id.open_button);
 
-        mButton.setOnClickListener {
 
-        }
     }
 
     fun displayFragment() {
@@ -29,16 +30,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun closeFragment() {
-
-        val simpleFragment = SimpleFragment()
-        simpleFragment?.let {
-            supportFragmentManager.beginTransaction().apply {
-                supportFragmentManager.beginTransaction().apply {
-                    remove(simpleFragment).commit()
-                }
-            }
+        val simpleFragment = supportFragmentManager.findFragmentByTag("1") ?: return
+        supportFragmentManager.beginTransaction().apply {
+            hide(simpleFragment)
+            mButton?.setText(R.string.open)
+            isFragmentDisplayed = false
+            commit()
         }
-        mButton?.setText(R.string.close)
-        isFragmentDisplayed = false
     }
 }
