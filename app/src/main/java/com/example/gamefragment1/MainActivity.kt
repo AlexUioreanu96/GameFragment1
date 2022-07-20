@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         mButton = findViewById(R.id.open_button);
 
-
     }
 
     fun displayFragment() {
@@ -36,6 +35,23 @@ class MainActivity : AppCompatActivity() {
             mButton?.setText(R.string.open)
             isFragmentDisplayed = false
             commit()
+        }
+    }
+
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        // Save the state of the fragment (true=open, false=closed).
+        savedInstanceState.putBoolean(STATE_FRAGMENT, isFragmentDisplayed)
+        super.onSaveInstanceState(savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mButton?.setOnClickListener {
+            if (isFragmentDisplayed) {
+                closeFragment()
+            } else {
+                displayFragment()
+            }
         }
     }
 }
