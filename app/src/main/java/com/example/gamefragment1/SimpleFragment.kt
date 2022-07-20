@@ -48,4 +48,11 @@ class SimpleFragment : Fragment() {
     fun newInstance(): SimpleFragment {
         return SimpleFragment()
     }
+
+    fun displayFragment() {
+        val simpleFragment = SimpleFragment()
+        simpleFragment.newInstance()
+        // TODO: Get the FragmentManager and start a transaction.
+        // TODO: Add the SimpleFragment.
+    }
 }
