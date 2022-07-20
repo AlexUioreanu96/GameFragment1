@@ -58,7 +58,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.example.fragmentsexample1.SimpleFragment"
+        android:name="com.example.gamefragment1.SimpleFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
