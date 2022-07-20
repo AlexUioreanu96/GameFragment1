@@ -17,7 +17,7 @@
     <string name="question_article">LIKE THE ARTICLE?</string>
 
     <!-- Text for the button in FragmentExample2. -->
-    <string name="open">Open</string>
+    <string name="open2">Open</string>
     <string name="close">Close</string>
 
     <!-- Text for the exception message in FragmentCommunicate. -->

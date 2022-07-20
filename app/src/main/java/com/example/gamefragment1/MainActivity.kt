@@ -6,11 +6,22 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     private var mButton: Button? = null
-    private val isFragmentDisplayed = false
+    private var isFragmentDisplayed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mButton = findViewById(R.id.open_button);
     }
+
+    fun displayFragment() {
+        val simpleFragment = SimpleFragment()
+        supportFragmentManager.beginTransaction().apply {
+            add(R.id.fragment_container, simpleFragment).addToBackStack(null).commit()
+            mButton?.setText(R.string.close);
+            isFragmentDisplayed = true
+        }
+        // TODO: Add the SimpleFragment.
+    }
+
 }
